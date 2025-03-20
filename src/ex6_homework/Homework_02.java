@@ -20,22 +20,25 @@ public class Homework_02 {
 		Scanner sc = new Scanner(System.in);
 		
 		
-		String[] strArr = { "a", "o", "b"  };
+		String[] strArr = { "apple", "orange", "banana", "strawberry"  };
 		
 		List<String> list = new ArrayList<String>();
 		
 		
 		
 		
-		TimeThread tt = new TimeThread();
+		TimeThread tt = new TimeThread(list,strArr);
 		tt.setDaemon(true);
 		tt.start();
 		
-		list.add(strArr[0]);
+		// list.add(strArr[0]);
+		
+		int ir = rnd.nextInt(strArr.length);
+        list.add(strArr[ir]);
 		
 		while( true ) {
 			
-			int ir = rnd.nextInt(strArr.length);
+              
 			
 			System.out.println(list);
 			System.out.print(">> ");
@@ -45,22 +48,12 @@ public class Homework_02 {
 			if( list.contains(input) ) {
 				list.remove(input);
 				
-				if( tt.getTimer() <= 3 ) {
-					System.out.println(list);
-			    }else {
-			    	list.add(strArr[ir]);
-			    	System.out.println(list);
-			    }
-				
-				
 			}else {
 				System.out.println("올바르게 입력해주세요");
-				list.add(strArr[ir]);
-				System.out.println(list);
 			}
 			
 			
-			if( list.contains(null) ){
+			if( list.size() == 0 ){
 				tt.setPlaying(false);
 				System.out.println("클리어!");
 				break;

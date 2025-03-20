@@ -5,12 +5,20 @@ import java.util.Random;
 
 public class TimeThread extends Thread {
 
-
-	private int timer = 0;
-
-	public int getTimer() {
-		return timer;
+	Random rnd = new Random();
+	List<String> list;
+	// private int timer = 0;
+	String[] strArr;
+	
+	public TimeThread(List<String> list,String[] strArr) {
+		this.list = list;
+		this.strArr=strArr;
 	}
+
+	/* public int getTimer() {
+		return timer;
+	} */  
+	// list.sleep에서 이미 리스트를 3초 후마다 추가했기 때문에 타이머는 필요 없다.
 
 
 
@@ -23,15 +31,11 @@ public class TimeThread extends Thread {
  
 
 
-	
-
-
-
-
 	@Override
 	public void run() {
+       // 3초 간격으로 list에 단어 추가		
 
-		while( isPlaying ) {
+		while( true ) {
 
 			try {
 				Thread.sleep(3000);
@@ -41,7 +45,8 @@ public class TimeThread extends Thread {
 				e.printStackTrace();
 			}
 
-			timer++;
+//			timer++;
+			list.add(strArr[new Random().nextInt(strArr.length)]);
 
 
 		} // while
